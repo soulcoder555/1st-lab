@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h2>{{ lab.name }}</h2>
+  <p>{{ lab.description }}</p>
+  <p><strong>Environment:</strong> {{ lab.environment_type }}</p>
+  <h3>Intentional Vulnerabilities</h3>
+  <ul>
+    {% for vuln in lab.intentional_vulnerabilities %}
+      <li><strong>{{ vuln.vuln_name }}</strong> at <em>{{ vuln.location }}</em>: {{ vuln.how_to_exploit }}</li>
+    {% endfor %}
+  </ul>
+  <p><strong>Reset Script:</strong> {{ lab.reset_script }}</p>
+  <form method="post" action="{{ url_for('main.lab_provision', lab_id=lab.id) }}">
+    <button class="button" type="submit">Provision Lab</button>
+  </form>
+</div>
+{% endblock %}

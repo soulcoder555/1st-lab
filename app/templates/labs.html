@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid">
+  {% for lab in labs %}
+  <div class="card">
+    <h3>{{ lab.name }}</h3>
+    <p>{{ lab.description }}</p>
+    <p><strong>Environment:</strong> {{ lab.environment_type }}</p>
+    <p><strong>Status:</strong> {{ lab.status }}</p>
+    <a class="button" href="{{ url_for('main.lab_detail', lab_id=lab.id) }}">Open Lab</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

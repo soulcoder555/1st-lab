@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid">
+  {% for vuln in vulnerabilities %}
+  <div class="card">
+    <span class="badge badge-{{ 'critical' if vuln.severity == 'Critical' else 'high' }}">{{ vuln.severity }}</span>
+    <h3>{{ vuln.name }}</h3>
+    <p>{{ vuln.description }}</p>
+    <a class="button" href="{{ url_for('main.vulnerability_detail', vuln_id=vuln.id) }}">View Details</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

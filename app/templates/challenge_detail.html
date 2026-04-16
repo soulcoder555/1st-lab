@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <span class="badge badge-critical">CVSS {{ challenge.cvss_score }}</span>
+  <h2>{{ challenge.title }}</h2>
+  <p>{{ challenge.description }}</p>
+  <h3>Exploitation Steps</h3>
+  <ol>
+    {% for step in challenge.exploitation_steps %}
+      <li><strong>{{ step.title }}</strong>: {{ step.description }}</li>
+    {% endfor %}
+  </ol>
+  <h3>Payload</h3>
+  <pre>{{ challenge.attack_payloads[0].payload }}</pre>
+  <h3>Security Defenses</h3>
+  <ul>
+    {% for defense in challenge.security_defenses %}
+      <li><strong>{{ defense.defense_name }}</strong>: {{ defense.how_it_works }}</li>
+    {% endfor %}
+  </ul>
+  <form method="post" action="{{ url_for('main.submit_challenge', challenge_id=challenge.id) }}">
+    <label for="proof">Proof of Exploitation</label>
+    <textarea id="proof" name="proof" placeholder="Describe the result or paste output."></textarea>
+    <button class="button" type="submit">Submit Proof</button>
+  </form>
+</div>
+{% endblock %}

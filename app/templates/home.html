@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid">
+  <div class="card">
+    <h2>Welcome to SecureLab Prototype</h2>
+    <p>Explore security challenges, vulnerability documentation, and lab environments in a standalone demo repository.</p>
+    <a class="button" href="{{ url_for('main.challenge_list') }}">Start Practicing</a>
+  </div>
+  <div class="card">
+    <h3>Platform Overview</h3>
+    <ul>
+      <li><strong>{{ challenges|length }}</strong> challenge templates</li>
+      <li><strong>{{ vulnerabilities|length }}</strong> vulnerability pages</li>
+      <li><strong>{{ labs|length }}</strong> lab environment summaries</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Recent Activity</h3>
+    {% if activity %}
+      <ul>
+        {% for item in activity[-3:] %}
+        <li>Challenge {{ item.challenge_id }} proof submitted</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No activity yet. Submit proof on a challenge to see it here.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid">
+  {% for challenge in challenges %}
+  <div class="card">
+    <span class="badge badge-{{ 'critical' if challenge.vulnerability_type == 'SQL Injection' else 'high' }}">{{ challenge.vulnerability_type }}</span>
+    <h3>{{ challenge.title }}</h3>
+    <p>{{ challenge.description }}</p>
+    <p><strong>{{ challenge.points }} points</strong> · {{ challenge.difficulty }}</p>
+    <a class="button" href="{{ url_for('main.challenge_detail', challenge_id=challenge.id) }}">View Challenge</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
